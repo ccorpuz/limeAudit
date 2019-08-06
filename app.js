@@ -45,7 +45,7 @@ var limeAPI = {
 limeAPI.body = JSON.stringify({
   method: "get_session_key",
   params: [lime_user, lime_password],
-  id: 1
+  id: 2
 });
 
 request(limeAPI, (error, response, body) => {
