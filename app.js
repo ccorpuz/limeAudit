@@ -81,7 +81,7 @@ request(limeAPI, (error, response, body) => {
       request(limeAPI, (error, response, body) => {
         if (!error && response.statusCode == 200) {
           body = JSON.parse(body);
-          console.log(body);
+          console.log(body.result[1]);
         } else console.log("ERROR -->" + error);
       });
 
