@@ -1,4 +1,32 @@
-var express = require("express");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: app.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: app.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -63,7 +91,7 @@ function getSession(username, password, APIvar) {
    * Send request to execute LSRC2 method call (get_session_key) and return session key.
    */
   request(APIvar, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+    if (!error &amp;&amp; response.statusCode == 200) {
       body = JSON.parse(body);
 
       if (SESSIONKEY === "") {
@@ -83,18 +111,18 @@ function getSession(username, password, APIvar) {
  * @param {string} username The lime survey username who's surveys you wish to return
  * @param {object} APIVar An object containing the url of the LSRC2 API access point, the method type ("i.e POST") and relevant headers.
  * @return {Object[]} An array of objects as follows:
- * <p>{ sid: '834781',
+ * &lt;p>{ sid: '834781',
     surveyls_title: 'IT Score',
     startdate: null,
     expires: null,
-    active: 'Y' }</p>
-    <ul>  
-        <li>(sid) represents the survey ID</li> 
-        <li>(surveyls_title) represents the title/name of the survey</li> 
-        <li>(startdate) represents the date the survey starts</li> 
-        <li>(expires) indicates if and when the survey will expire</li> 
-        <li>(active) represents if the survey is currently active.</li> 
-    </ul>
+    active: 'Y' }&lt;/p>
+    &lt;ul>  
+        &lt;li>(sid) represents the survey ID&lt;/li> 
+        &lt;li>(surveyls_title) represents the title/name of the survey&lt;/li> 
+        &lt;li>(startdate) represents the date the survey starts&lt;/li> 
+        &lt;li>(expires) indicates if and when the survey will expire&lt;/li> 
+        &lt;li>(active) represents if the survey is currently active.&lt;/li> 
+    &lt;/ul>
  */
 function listSurveys(sessionkey, username, APIVar) {
   limeAPI.body = JSON.stringify({
@@ -104,7 +132,7 @@ function listSurveys(sessionkey, username, APIVar) {
   });
 
   request(APIVar, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+    if (!error &amp;&amp; response.statusCode == 200) {
       body = JSON.parse(body);
       let surveys = body.result;
       return surveys;
@@ -118,7 +146,7 @@ function listSurveys(sessionkey, username, APIVar) {
  * @param {number} surveyId The survey ID of the survey that you wish to extract the questions and details from.
  * @param {object} APIVar An object containing the url of the LSRC2 API access point, the method type ("i.e POST") and relevant headers.
  * @return {Object[]} An array of objects as follows:
- * <p>id: (Object),
+ * &lt;p>id: (Object),
        qid: '249',
        parent_qid: '171',
        sid: '243417',
@@ -135,20 +163,20 @@ function listSurveys(sessionkey, username, APIVar) {
        same_default: '0',
        relevance: '1',
        modulename: '',
-       gid: '3' }</p>
-    <ul>  
-        <li>(qid) The lime survey question ID</li> 
-        <li>(parent_qid) represents the question ID of the parent, particularly if the question is a sub question of a main question</li> 
-        <li>(sid) represents the survey ID</li> 
-        <li>(type) indicates the type of the lime survey (i.e array, multiple choice, single choice with rows). For some reason all of the question types are represented with T which is a long text question</li> 
-        <li>(title) represents the "title" of the question. In this case SQ012 is a subquestion number 12. This does not need to be displayed</li> 
-        <li>(question) This is the actual question text which should be displayed</li> 
-        <li>(help) Indicates if there is any hint text provided with the question</li> 
-        <li>(other) indicates if there is an input option for "other" if the user's option is not present (i.e other: _____ )</li> 
-        <li>(question_order) represents the order of the question, particularly if it is a subquestion of a parent question</li>
-        <li>(language) indicates the language the question is presented in</li> 
-        <li>(gid) indicates the group ID of the question (i.e Risk Management questions are part of group 2, Finance questions are part of question group 3)</li>  
-    </ul>
+       gid: '3' }&lt;/p>
+    &lt;ul>  
+        &lt;li>(qid) The lime survey question ID&lt;/li> 
+        &lt;li>(parent_qid) represents the question ID of the parent, particularly if the question is a sub question of a main question&lt;/li> 
+        &lt;li>(sid) represents the survey ID&lt;/li> 
+        &lt;li>(type) indicates the type of the lime survey (i.e array, multiple choice, single choice with rows). For some reason all of the question types are represented with T which is a long text question&lt;/li> 
+        &lt;li>(title) represents the "title" of the question. In this case SQ012 is a subquestion number 12. This does not need to be displayed&lt;/li> 
+        &lt;li>(question) This is the actual question text which should be displayed&lt;/li> 
+        &lt;li>(help) Indicates if there is any hint text provided with the question&lt;/li> 
+        &lt;li>(other) indicates if there is an input option for "other" if the user's option is not present (i.e other: _____ )&lt;/li> 
+        &lt;li>(question_order) represents the order of the question, particularly if it is a subquestion of a parent question&lt;/li>
+        &lt;li>(language) indicates the language the question is presented in&lt;/li> 
+        &lt;li>(gid) indicates the group ID of the question (i.e Risk Management questions are part of group 2, Finance questions are part of question group 3)&lt;/li>  
+    &lt;/ul>
  */
 function listQuestions(sessionkey, surveyId, APIVar) {
   APIVar.body = JSON.stringify({
@@ -158,7 +186,7 @@ function listQuestions(sessionkey, surveyId, APIVar) {
   });
 
   request(APIVar, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+    if (!error &amp;&amp; response.statusCode == 200) {
       body = JSON.parse(body);
       console.log(body);
       return body;
@@ -171,11 +199,11 @@ function listQuestions(sessionkey, surveyId, APIVar) {
  * @param {string} sessionkey The session key saved in var SESSIONKEY after calling getSession()
  * @param {number} surveyId The survey ID of the survey that you wish to save the responses of.
  * @param {object} responseObj This is an object having entries of a key value pair in the format example: 
- * <p><strong>const fakeResponse = {
+ * &lt;p>&lt;strong>const fakeResponse = {
         "243417X3X170": "A1",
         "243417X3X171SQ001": "A1",
         "243417X3X171SQ002": "A1"
-      };</strong></p> The key will have to be generated in the format (sid)X(gid)X(parent_qid)(title, if the question is a subquestion).
+      };&lt;/strong>&lt;/p> The key will have to be generated in the format (sid)X(gid)X(parent_qid)(title, if the question is a subquestion).
  * @param {object} APIVar An object containing the url of the LSRC2 API access point, the method type ("i.e POST") and relevant headers.
  */
 function saveResponse(sessionkey, surveyId, responseObj, APIVar) {
@@ -186,7 +214,7 @@ function saveResponse(sessionkey, surveyId, responseObj, APIVar) {
   });
 
   request(APIVar, (error, response, body) => {
-    if (!error && response.statusCode == 200) {
+    if (!error &amp;&amp; response.statusCode == 200) {
       body = JSON.parse(body);
     } else console.log("ERROR -->" + error + response + body);
   });
@@ -194,3 +222,26 @@ function saveResponse(sessionkey, surveyId, responseObj, APIVar) {
 
 getSession(lime_user, lime_password, limeAPI);
 module.exports = app;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getSession">getSession</a></li><li><a href="global.html#listQuestions">listQuestions</a></li><li><a href="global.html#listSurveys">listSurveys</a></li><li><a href="global.html#saveResponse">saveResponse</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Aug 06 2019 17:49:29 GMT+0400 (Gulf Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

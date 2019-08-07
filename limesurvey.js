@@ -1,32 +1,8 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-
-const surveysRouter = require("./routes/api/survey");
-
-var app = express();
-
-app.set("view engine", "html");
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/api/survey", surveysRouter);
-
 var request = require("request");
 
 const lime_user = "admin";
 const lime_password = "password";
-const surveyId = 243417;
+
 var SESSIONKEY = "";
 var limeAPI = {
   url:
@@ -68,9 +44,7 @@ function getSession(username, password, APIvar) {
 
       if (SESSIONKEY === "") {
         SESSIONKEY = body.result;
-        // Call LSRC2 functions here
-        listQuestions(SESSIONKEY, surveyId, limeAPI);
-        console.log(SESSIONKEY);
+        // Could call LSRC2 functions here
         return SESSIONKEY;
       }
     }
@@ -160,7 +134,6 @@ function listQuestions(sessionkey, surveyId, APIVar) {
   request(APIVar, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       body = JSON.parse(body);
-      console.log(body);
       return body;
     } else console.log("ERROR -->" + error);
   });
@@ -191,6 +164,3 @@ function saveResponse(sessionkey, surveyId, responseObj, APIVar) {
     } else console.log("ERROR -->" + error + response + body);
   });
 }
-
-getSession(lime_user, lime_password, limeAPI);
-module.exports = app;
